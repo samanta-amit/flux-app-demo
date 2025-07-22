@@ -1,0 +1,20 @@
+apiVersion: flux-framework.org/v1alpha2
+kind: MiniCluster
+metadata:
+  name: flux-sample
+spec:
+  size: 1
+  interactive: true
+
+  # This disables installing flux via the view
+  flux:
+    container:
+      disable: true
+
+  containers:
+  - image: ghcr.io/converged-computing/metric-stream:libfabric-cpu-zen4
+    volumes:
+      # Ensure /dev/shm does not limit efa
+      shared-memory:
+        emptyDir: true
+        emptyDirMedium: "memory"
