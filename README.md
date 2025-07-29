@@ -6,6 +6,7 @@ kind create cluster --config kind-config.yaml --name flux-cluster --loglevel deb
 kubectl get nodes
 kubectl apply -f flux-operator.yaml
 kubectl get pods -n operator-system
+kubectl delete minicluster flux-sample -n default
 kubectl apply -f stream.yaml
 kubectl get pods -n default | grep flux-sample
 kubectl exec -it -n default flux-sample-0-gscrb -c flux-sample -- bash
